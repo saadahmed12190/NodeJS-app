@@ -37,16 +37,26 @@ jobs:
       env:
         ECR_REPOSITORY: saad
       run: |
-        docker build -t saad .
+        docker build -t $ECR_REPOSITORY .
         
     - name: Tag and Push
       env:
         ECR_REPOSITORY: saad
+        TAG: latest
+        ACCOUNT_URL: 489994096722.dkr.ecr.us-east-1.amazonaws.com
       run: |
-        docker tag saad:latest 489994096722.dkr.ecr.us-east-1.amazonaws.com/saad:latest
-        docker push 489994096722.dkr.ecr.us-east-1.amazonaws.com/saad:latest
+        docker tag $ECR_REPOSITORY:$TAG $ACCOUNT_URL/$ECR_REPOSITORY:latest
+        docker push ACCOUNT_URL/$ECR_REPOSITORY:latest
 
 
     - name: Deploy Amazon ECS task definition
+      env:
+        ECR_REPOSITORY: saad
+        ECS_CLUSTER: saad-ecs-cluster
+        ECS_SERVICE: saad-test-service
+        ECS_CONTAINER: saad-test-container
+        REGION: us-east-1
+        ACCOUNT_URL: 489994096722.dkr.ecr.us-east-1.amazonaws.com
+        TAG: latest
       run: |
-        ecs deploy saad-ecs-cluster saad-test-service --region us-east-1 --image saad-test-container 489994096722.dkr.ecr.us-east-1.amazonaws.com/saad:latest
+        ecs deploy $ECS_CLUSTER $ECS_SERVICE --region $REGION --image $ECS_CONTAINER ACCOUNT_URL/$ECR_REPOSITORY:$TAG
