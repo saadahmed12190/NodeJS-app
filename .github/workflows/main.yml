@@ -48,9 +48,5 @@ jobs:
 
 
     - name: Deploy Amazon ECS task definition
-      uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
-      with:
-          task-definition: saad-taskdefinition
-          service: saad-test-service
-          cluster: saad-ecs-cluster
-          wait-for-service-stability: true
+      run: |
+        ecs deploy saad-ecs-cluster saad-test-service --region us-east-1 --image saad-test-container 489994096722.dkr.ecr.us-west-2.amazonaws.com/saad:latest
