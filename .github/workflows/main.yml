@@ -9,17 +9,19 @@ permissions:
   contents: read
 
 jobs:
-  
   build:
     
     name: Build Image
     runs-on: ubuntu-latest
+    steps:
+    - name: Installing ECS deploy
+      run: | 
+         pip install ecs-deploy
 
    
-    steps:
-
     - name: Check out code
       uses: actions/checkout@v2
+
     
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -43,3 +45,8 @@ jobs:
       run: |
         docker tag saad:latest 489994096722.dkr.ecr.us-east-1.amazonaws.com/saad:latest
         docker push 489994096722.dkr.ecr.us-east-1.amazonaws.com/saad:latest
+
+
+    - name: Deploy Amazon ECS task definition
+      run: |
+        ecs deploy saad-ecs-cluster saad-test-service --region us-east-1 --image saad-test-container 489994096722.dkr.ecr.us-east-1.amazonaws.com/saad:latest
