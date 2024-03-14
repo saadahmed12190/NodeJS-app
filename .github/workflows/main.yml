@@ -43,3 +43,20 @@ jobs:
       run: |
         docker tag saad:latest 489994096722.dkr.ecr.us-east-1.amazonaws.com/saad:latest
         docker push 489994096722.dkr.ecr.us-east-1.amazonaws.com/saad:latest
+
+
+    - name: Fill in the new image ID in the Amazon ECS task definition
+      id: task-def
+      uses: aws-actions/amazon-ecs-render-task-definition@c804dfbdd57f713b6c079302a4c01db7017a36fc
+      with:
+          task-definition: saad-taskdefinition
+          container-name: saad-test-container
+          image: 489994096722.dkr.ecr.us-east-1.amazonaws.com/saad:latest
+
+    - name: Deploy Amazon ECS task definition
+      uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
+      with:
+          task-definition: saad-taskdefinition
+          service: saad-test-service
+          cluster: saad-ecs-cluster
+          wait-for-service-stability: true
