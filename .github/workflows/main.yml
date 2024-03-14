@@ -46,7 +46,7 @@ jobs:
         ACCOUNT_URL: 489994096722.dkr.ecr.us-east-1.amazonaws.com
       run: |
         docker tag $ECR_REPOSITORY:$TAG $ACCOUNT_URL/$ECR_REPOSITORY:latest
-        docker push ACCOUNT_URL/$ECR_REPOSITORY:latest
+        docker push $ACCOUNT_URL/$ECR_REPOSITORY:latest
 
 
     - name: Deploy Amazon ECS task definition
@@ -59,4 +59,4 @@ jobs:
         ACCOUNT_URL: 489994096722.dkr.ecr.us-east-1.amazonaws.com
         TAG: latest
       run: |
-        ecs deploy $ECS_CLUSTER $ECS_SERVICE --region $REGION --image $ECS_CONTAINER ACCOUNT_URL/$ECR_REPOSITORY:$TAG
+        ecs deploy $ECS_CLUSTER $ECS_SERVICE --region $REGION --image $ECS_CONTAINER $ACCOUNT_URL/$ECR_REPOSITORY:$TAG
