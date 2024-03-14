@@ -49,4 +49,4 @@ jobs:
 
     - name: Deploy Amazon ECS task definition
       run: |
-        ecs deploy saad-ecs-cluster saad-test-service --region us-east-1 --image saad-test-container 489994096722.dkr.ecr.us-west-2.amazonaws.com/saad:latest
+        ecs deploy saad-ecs-cluster saad-test-service --region us-east-1 --image saad-test-container 489994096722.dkr.ecr.us-west-2.amazonaws.com/saad
