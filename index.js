@@ -1,23 +1,25 @@
-const express = require('express')
-const app = express()
-const port = process.env.PORT || 3000;
-const config = require('config')
+// Import required modules
+const express = require('express');
 
-app.get('/', (req, res)=>{
-    res.send('CI/CD App, Works well !')
-})
+// Create an instance of the Express application
+const app = express();
 
-app.get('/status', (req, res)=>{
-    res.status(200)
-    res.send('Okay')
-})
+// Define a route for the homepage
+app.get('/', (req, res) => {
+  res.send('<h1>Hi, This is a demo App!</h1>');
+});
 
-app.get('/hello',(req, res)=>{
-    res.status(200)
-    res.send('Hi, there!')
+// Define a route for a sample API endpoint
+app.get('/api/data', (req, res) => {
+  const data = {
+    message: 'This is some sample data from the API.',
+    timestamp: new Date(),
+  };
+  res.json(data);
+});
 
-})
-
-app.listen(port, ()=>{
-    console.log(`Example app listening on http://localhost:${port}`);
-})
+// Set up the server to listen on a port
+const port = process.env.PORT || 80;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
