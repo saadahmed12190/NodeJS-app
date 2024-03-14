@@ -6,7 +6,7 @@ const app = express();
 
 // Define a route for the homepage
 app.get('/', (req, res) => {
-  res.send('<h1>Hi, This is a demo App!</h1>');
+  res.send('<h1>Hi, This is a demo Application!</h1>');
 });
 
 // Define a route for a sample API endpoint
