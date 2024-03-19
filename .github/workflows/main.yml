@@ -45,7 +45,7 @@ jobs:
         TAG: ${{ github.run_number }}
         ACCOUNT_URL: 489994096722.dkr.ecr.us-east-1.amazonaws.com
       run: |
-        docker tag $ECR_REPOSITORY:$TAG $ACCOUNT_URL/$ECR_REPOSITORY:$TAG
+        docker tag $ECR_REPOSITORY:latest $ACCOUNT_URL/$ECR_REPOSITORY:$TAG
         docker push $ACCOUNT_URL/$ECR_REPOSITORY:$TAG
 
 
