@@ -52,7 +52,7 @@ jobs:
     - name: Deploy Amazon ECS task definition
       env:
         ECR_REPOSITORY: saad
-        ECS_CLUSTER: saad-ecs-cluster
+        ECS_CLUSTER: saad-ecs
         ECS_SERVICE: saad-test-service
         ECS_CONTAINER: saad-test-container
         REGION: us-east-1
