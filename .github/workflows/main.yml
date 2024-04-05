@@ -35,13 +35,13 @@ jobs:
 
     - name: Build
       env:
-        ECR_REPOSITORY: sparrowell-repo
+        ECR_REPOSITORY: sparrowell-repo-1
       run: |
         docker build -t $ECR_REPOSITORY .
         
     - name: Tag and Push
       env:
-        ECR_REPOSITORY: sparrowell-repo
+        ECR_REPOSITORY: sparrowell-repo-1
         TAG: ${{ github.run_number }}
         ACCOUNT_URL: 489994096722.dkr.ecr.us-west-1.amazonaws.com
       run: |
