@@ -49,14 +49,14 @@ jobs:
         docker push $ACCOUNT_URL/$ECR_REPOSITORY:$TAG
 
 
-    # - name: Deploy Amazon ECS task definition
-    #   env:
-    #     ECR_REPOSITORY: saad
-    #     ECS_CLUSTER: saad-ecs
-    #     ECS_SERVICE: saad-test-service
-    #     ECS_CONTAINER: saad-test-container
-    #     REGION: us-east-1
-    #     ACCOUNT_URL: 489994096722.dkr.ecr.us-east-1.amazonaws.com
-    #     TAG: ${{ github.run_number }}
-    #   run: |
-    #     ecs deploy $ECS_CLUSTER $ECS_SERVICE --region $REGION --image $ECS_CONTAINER $ACCOUNT_URL/$ECR_REPOSITORY:$TAG
+    - name: Deploy Amazon ECS task definition
+      env:
+        ECR_REPOSITORY: sparrowell-repo-1
+        ECS_CLUSTER: core-cluster
+        ECS_SERVICE: sparrowell_service
+        ECS_CONTAINER: sparrowell_container
+        REGION: us-west-1
+        ACCOUNT_URL: 489994096722.dkr.ecr.us-west-1.amazonaws.com
+        TAG: ${{ github.run_number }}
+      run: |
+        ecs deploy $ECS_CLUSTER $ECS_SERVICE --region $REGION --image $ECS_CONTAINER $ACCOUNT_URL/$ECR_REPOSITORY:$TAG
