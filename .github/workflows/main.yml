@@ -35,13 +35,13 @@ jobs:
 
     - name: Build
       env:
-        ECR_REPOSITORY: sparrowell-repo-1
+        ECR_REPOSITORY: core-repo
       run: |
         docker build -t $ECR_REPOSITORY .
         
     - name: Tag and Push
       env:
-        ECR_REPOSITORY: sparrowell-repo-1
+        ECR_REPOSITORY: core-repo
         TAG: ${{ github.run_number }}
         ACCOUNT_URL: 489994096722.dkr.ecr.us-west-1.amazonaws.com
       run: |
@@ -51,7 +51,7 @@ jobs:
 
     - name: Deploy Amazon ECS task definition
       env:
-        ECR_REPOSITORY: sparrowell-repo-1
+        ECR_REPOSITORY: core-repo
         ECS_CLUSTER: core-cluster
         ECS_SERVICE: sparrowell_service
         ECS_CONTAINER: sparrowell_container
